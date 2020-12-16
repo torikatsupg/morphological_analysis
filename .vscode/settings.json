@@ -1,0 +1,15 @@
+{
+  "python.autoComplete.extraPaths": [
+    "../venv/"
+  ],
+  "python.analysis.extraPaths": [
+    "../venv/"
+  ],
+  "cSpell.words": [
+    "dropna",
+    "fillna",
+    "isnan",
+    "iterrows",
+    "reskov"
+  ]
+}
