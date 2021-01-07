@@ -52,7 +52,35 @@ def render_tree(csv_path: str, file_name: str):
          dg.edge(column, index, label=str(round(value, 3)))
   dg.render(file_name + '.gv', view=True)
 
-# test
-render_tree("../csv/markov/class_markov.csv",     "class_markov_graph")
-render_tree("../csv/markov/method_markov.csv",    "method_markov_graph")
-render_tree("../csv/markov/variable_markov.csv",  "variable_markov_graph")
+def count_record_length():
+  class_len =    len(pd.read_csv("../csv/modified/class_morphological.csv",    index_col=0, usecols=range(1), low_memory=False, dtype="object"))
+  method_len =   len(pd.read_csv("../csv/modified/method_morphological.csv",   index_col=0, usecols=range(1), low_memory=False, dtype="object"))
+  variable_len = len(pd.read_csv("../csv/modified/variable_morphological.csv", index_col=0, usecols=range(1), low_memory=False, dtype="object"))
+  print("class", class_len)
+  print("method", method_len)
+  print("variable", variable_len)
+  print("sum", class_len + method_len + variable_len)
+
+def sum_word_length():
+  class_df =    pd.read_csv("../csv/modified/class_morphological.csv",    index_col=0, usecols=range(8), low_memory=False)
+  method_df =   pd.read_csv("../csv/modified/method_morphological.csv",   index_col=0, usecols=range(8), low_memory=False)
+  variable_df = pd.read_csv("../csv/modified/variable_morphological.csv", index_col=0, usecols=range(8), low_memory=False)
+  class_words     = class_df["wordLength"].sum()
+  method_words    = method_df["wordLength"].sum()
+  variable_words  = variable_df["wordLength"].sum()
+  print("class", class_words)
+  print("method", method_words)
+  print("variable", variable_words)
+  print("sum", class_words + method_words + variable_words)
+
+#render_tree("../csv/markov/modified/class_markov_modified.csv",      "class_markov_tree")
+#render_tree("../csv/markov/modified/method_markov_modified.csv",    "method_markov_tree")
+#render_tree("../csv/markov/modified/variable_markov_modified.csv","variable_markov_tree")
+#render_tree("../csv/markov/modified/alice_markov_rate_modified.csv", "alice_markov_tree")
+
+# render_heatmap("../csv/markov/modified/class_markov_modified.csv",      "class_markov_heatmap")
+# render_heatmap("../csv/markov/modified/method_markov_modified.csv",    "method_markov_heatmap")
+# render_heatmap("../csv/markov/modified/variable_markov_modified.csv","variable_markov_heatmap")
+# render_heatmap("../csv/markov/modified/alice_markov_rate_modified.csv", "alice_markov_heatmap")
+
+sum_word_length()
