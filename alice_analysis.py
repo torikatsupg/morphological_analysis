@@ -78,3 +78,6 @@ def create_transition_matrix_from_alice():
   tokens = tokenize()
   tag_transitions = to_tag_transitions(tokens)
   to_transition_matrix(tag_transitions).fillna(0).to_csv('./alice_transition.csv')
+
+def analysis():
+  alice = nltk.text.Text(nltk.corpus.gutenberg.words('carroll-alice.txt'))

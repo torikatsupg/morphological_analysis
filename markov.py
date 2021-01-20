@@ -43,7 +43,7 @@ def render_heatmap(csv_path: str, file_name: str):
   plt.close("all")
 
 def render_tree(csv_path: str, file_name: str):
-  dg = Digraph(comment='The Round Table')
+  dg = Digraph(comment='The Round Table', engine="circo")
   df = pd.read_csv(csv_path, index_col=0)
   for column in df.columns:
     for index in df.index:
@@ -73,14 +73,15 @@ def sum_word_length():
   print("variable", variable_words)
   print("sum", class_words + method_words + variable_words)
 
-#render_tree("../csv/markov/modified/class_markov_modified.csv",      "class_markov_tree")
-#render_tree("../csv/markov/modified/method_markov_modified.csv",    "method_markov_tree")
-#render_tree("../csv/markov/modified/variable_markov_modified.csv","variable_markov_tree")
-#render_tree("../csv/markov/modified/alice_markov_rate_modified.csv", "alice_markov_tree")
+# render_tree("../csv/markov/modified/class_markov_modified.csv",      "class_markov_tree")
+# render_tree("../csv/markov/modified/method_markov_modified.csv",    "method_markov_tree")
+# render_tree("../csv/markov/modified/variable_markov_modified.csv","variable_markov_tree")
+# render_tree("../csv/markov/modified/alice_markov_rate_modified.csv", "alice_markov_tree")
 
 # render_heatmap("../csv/markov/modified/class_markov_modified.csv",      "class_markov_heatmap")
 # render_heatmap("../csv/markov/modified/method_markov_modified.csv",    "method_markov_heatmap")
-# render_heatmap("../csv/markov/modified/variable_markov_modified.csv","variable_markov_heatmap")
+# render_heatmap("../csv/markov/modified/alice_markov_rate_modified.csv", "alice_markov_heatmap")
 # render_heatmap("../csv/markov/modified/alice_markov_rate_modified.csv", "alice_markov_heatmap")
 
-sum_word_length()
+render_heatmap("../data/chi2/chi_test/result-OR.csv","heatmap")
+"../data/chi2/"

@@ -1,4 +1,7 @@
+from matplotlib.pyplot import axis
+from numpy.lib.function_base import vectorize
 import pandas as pd
+import numpy as np
 
 MODIFIED_CSV_DIRETORY = "../../data/csv/modified/"
 EXPORT_DIRECTORY = "../../data/csv/split/"
@@ -60,3 +63,24 @@ def check():
   df_without_big = pd.read_csv(EXPORT_DIRECTORY + "variable_without_big.csv", usecols=range(1))
   df_only_big = pd.read_csv(EXPORT_DIRECTORY + "variable_only_big.csv", usecols=range(1))
   print(len(df_all) == (len(df_only_big) + len(df_without_big)))
+
+def sum_morph():
+  result = pd.concat([
+    pd.read_csv(EXPORT_DIRECTORY + "class_without_big.csv",    usecols=range(6, 43), low_memory=False, index_col=0).sum(),
+    pd.read_csv(EXPORT_DIRECTORY + "method_without_big.csv",   usecols=range(7, 44), low_memory=False, index_col=0).sum(),
+    pd.read_csv(EXPORT_DIRECTORY + "variable_without_big.csv", usecols=range(8, 45), low_memory=False, index_col=0).sum(),
+    pd.read_csv(EXPORT_DIRECTORY + "class_only_big.csv",       usecols=range(6, 43), low_memory=False, index_col=0).sum(),
+    pd.read_csv(EXPORT_DIRECTORY + "method_only_big.csv",      usecols=range(7, 44), low_memory=False, index_col=0).sum(),
+    pd.read_csv(EXPORT_DIRECTORY + "variable_only_big.csv",    usecols=range(8, 45), low_memory=False, index_col=0).sum(),
+  ], axis=1)
+  result.to_csv(EXPORT_DIRECTORY + "sum.csv")
+
+def compute_cosign():
+  df = pd.read_csv(EXPORT_DIRECTORY + "confirm_big_project_effect.csv", low_memory=False, index_col=0)
+  for column_name in df.columns:
+    series = df[column_name]
+    print(series.to_list())
+    #normalized_series = np.linalg.norm(series.to_list())
+    #print(normalized_series)
+
+compute_cosign()
